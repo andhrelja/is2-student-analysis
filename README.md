@@ -8,10 +8,10 @@ Pri izvozu podataka, oni su u Microsoft Excel formatu (.xls) te se takvi spremaj
 Analiza sudjelovanja učenika u nastavi kroz podatake izvezene iz sustava e-Dnevnik izvedena je kroz:
 
 1. Transformaciju izvezenih podataka
-   -  svaki učenik predstavlja jedinstveni identifikator retka *tablice*
+   -  svaki učenik predstavlja jedinstveni **identifikator** retka *tablice*
    -  u početku svaka datoteka predstavlja svoju *tablicu*
    -  rezultat je jedna *tablica* za svaki razred (5.c, 6.c, 7.c)
-   -  transformacijama nad podatcima, brišu se nepostojeće vrijednosti ()
+   -  podatci se **čiste**, nepostojeće vrijednosti se mijenjaju s konstantom 0
    -  rezultirajuća *tablica* sadrži stupce svih triju datotečnih *tablica*:
       -  iz triju datotečnih *tablica* izvlače se stupci i stvara se jedinstvena *tablica* sa sljedećim stupcima:
           ```
@@ -39,4 +39,4 @@ Analiza sudjelovanja učenika u nastavi kroz podatake izvezene iz sustava e-Dnev
 
 2. Analizu transformiranih podataka
    - nad podatcima se izvršava Istraživačka analiza podataka (engl. Exploratory Data Analysis - EDA)
-
+   

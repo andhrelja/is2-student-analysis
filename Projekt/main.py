@@ -2,7 +2,7 @@ import json
 import pandas as pd
 
 from config import RAZREDI, ROOT_DIR
-
+import groups
 
 TRANSFORM_ZAKLJUCNE_OCJENE = {
     'Učenik': lambda x: x.split(".")[1].strip()
@@ -10,6 +10,7 @@ TRANSFORM_ZAKLJUCNE_OCJENE = {
 
 UCENICI = set()
 PREDMETI = set()
+GRUPE = groups.__all__
 
 razredi = (5, 6, 7)
 replace_chars = {
@@ -79,6 +80,7 @@ def rename_df(df):
     df.columns = renamed_cols
     return df
 
+
 def get_razred_df(razred):
     izostanci_df = pd.read_excel(razred['files'][0])
     vladanje_df = pd.read_excel(razred['files'][1])
@@ -91,6 +93,14 @@ def get_razred_df(razred):
     izostanci_df['Broj Izostanaka'] = izostanci_df['Ukupno']
     vladanje_df['Vladanje'] = vladanje_df['Ocjena']  
 
+    for group in GRUPE:
+        subjects = group['subjects']
+        for subject in group['subjects']:
+            if subject not in ocjene_df.columns:
+                subjects.remove(subject)
+        
+        ocjene_df[group['name']] = ocjene_df[subjects].sum()
+    
     write_objs_to_json(ocjene_df, type_name='students') 
     write_objs_to_json(ocjene_df, type_name='subjects')
     
